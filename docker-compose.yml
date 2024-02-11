@@ -10,6 +10,7 @@ services:
     volumes:
       - ./back:/app/go
     tty: true
+
   frontend:
     build:
       context: ./front/
@@ -19,3 +20,22 @@ services:
     ports:
       - 3000:3000 
     tty: true
+    
+  pgsql_db:
+    container_name: ${CONTAINER_NAME}
+    hostname: ${HOSTNAME}
+    build:
+      context: ./back/db/
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${USER_NAME}
+      - POSTGRES_PASSWORD=${USER_PASS}
+    volumes:
+      - db_vol:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  db_vol:
