@@ -10,3 +10,12 @@ services:
     volumes:
       - ./back:/app/go
     tty: true
+  frontend:
+    build:
+      context: ./front/
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/app/front
+    ports:
+      - 3000:3000 
+    tty: true
