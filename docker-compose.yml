@@ -3,7 +3,7 @@ version: "3.9"
 services:
   go-backend:
     build:
-      context: ./back/
+      context: ./dockerfile/backend
       dockerfile: Dockerfile
     ports:
       - 8080:8080
@@ -15,7 +15,7 @@ services:
 
   frontend:
     build:
-      context: ./front/
+      context: ./dockerfile/frontend
       dockerfile: Dockerfile
     volumes:
       - ./front:/app/front
@@ -26,7 +26,7 @@ services:
   pgsql_db:
     container_name: ${CONTAINER_NAME}
     build:
-      context: ./back/db/
+      context: ./dockerfile/db/
       dockerfile: Dockerfile
     restart: always
     environment:
